@@ -3,263 +3,296 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Scouting Technical File – Désiré Doué</title>
+  <title>Technical File – Désiré Doué (MVC)</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <div class="page">
+    <header class="header">
+      <div class="brand">
+        <div class="brand-title">SCOUTING TECHNICAL FILE</div>
+        <div class="brand-sub">
+          Module 5: Reporting — Professional Diploma in Football Scouting and Analysis — Barça Innovation Hub
+        </div>
+      </div>
+
+      <div class="chip" id="chipSeason">Season: —</div>
+    </header>
+
     <div class="layout">
 
-      <!-- LEFT PANEL (ONLY SEASON + LIVE/VIDEO) -->
-      <aside class="left" aria-label="Left panel">
-        <div class="left-title">TECHNICAL FILE</div>
-
-        <div class="selector">
-          <label for="seasonSelect">SEASON</label>
-          <select id="seasonSelect"></select>
-          <div class="hint" id="refDateHint"></div>
+      <!-- LEFT: CONTROLS + KPI -->
+      <aside class="left">
+        <div class="block">
+          <label class="label" for="seasonSelect">Season</label>
+          <select id="seasonSelect" class="select"></select>
+          <div class="small" id="ageRefNote">—</div>
         </div>
 
-        <div class="left-cards" aria-label="Season dependent key stats">
-          <div class="card"><div class="k">MATCHES</div><div class="v" id="kpi-mp">—</div></div>
-          <div class="card"><div class="k">MINUTES</div><div class="v" id="kpi-min">—</div></div>
-          <div class="card"><div class="k">GOALS</div><div class="v" id="kpi-gls">—</div></div>
-          <div class="card"><div class="k">ASSISTS</div><div class="v" id="kpi-ast">—</div></div>
-          <div class="card"><div class="k">RATING</div><div class="v" id="kpi-rating">—</div></div>
-          <div class="card"><div class="k">xG</div><div class="v" id="kpi-xg">—</div></div>
-          <div class="card"><div class="k">xA</div><div class="v" id="kpi-xa">—</div></div>
-          <div class="card"><div class="k">GI</div><div class="v" id="kpi-gi">—</div></div>
-          <div class="card"><div class="k">xGI</div><div class="v" id="kpi-xgi">—</div></div>
+        <div class="kpis">
+          <div class="kpi">
+            <div class="k">Matches played (MP)</div>
+            <div class="v" id="kpiMp">—</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Minutes played (MIN)</div>
+            <div class="v" id="kpiMin">—</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Goals (GLS)</div>
+            <div class="v" id="kpiGls">—</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Assists (AST)</div>
+            <div class="v" id="kpiAst">—</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Avg. rating</div>
+            <div class="v" id="kpiRating">—</div>
+          </div>
+
+          <div class="kpi accent">
+            <div class="k">Successful dribble rate (SDR%)</div>
+            <div class="v" id="kpiSdrPct">—</div>
+            <div class="small" id="kpiSdrVol">—</div>
+          </div>
+
+          <div class="kpi">
+            <div class="k">Expected goals (xG)</div>
+            <div class="v" id="kpiXg">—</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Expected assists (xA)</div>
+            <div class="v" id="kpiXa">—</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Goal involvement (GI = G+A)</div>
+            <div class="v" id="kpiGi">—</div>
+          </div>
+          <div class="kpi">
+            <div class="k">Expected GI (xGI = xG+xA)</div>
+            <div class="v" id="kpiXgi">—</div>
+          </div>
         </div>
 
-        <div class="toggle-row" role="group" aria-label="Observation mode">
-          <button class="toggle active" id="toggleLive" type="button">LIVE</button>
-          <button class="toggle" id="toggleVideo" type="button">VIDEO</button>
+        <div class="block">
+          <button id="btnSummary" class="btn">SCOUTING SUMMARY</button>
+          <div class="small" id="status">Status: ready.</div>
         </div>
-
-        <button class="action" id="btnScouting" type="button">SCOUTING SUMMARY</button>
-
-        <div class="left-footnote" id="statusLine">Status: ready.</div>
       </aside>
 
-      <!-- MAIN -->
-      <main class="right" aria-label="Main content">
+      <!-- RIGHT: REPORT -->
+      <main class="right">
 
-        <section class="topgrid">
-          <div class="identity" aria-label="Identity block">
-            <div class="row2">
+        <section class="top">
+          <div class="identity">
+            <div class="grid2">
               <div class="cell">
-                <div class="lbl">NAME</div>
-                <div class="val" id="p-name">—</div>
+                <div class="h">Name</div>
+                <div class="t" id="pName">—</div>
               </div>
               <div class="cell">
-                <div class="lbl">NATIONALITY</div>
-                <div class="val" id="p-nat">—</div>
+                <div class="h">Nationality</div>
+                <div class="t" id="pNat">—</div>
               </div>
             </div>
 
-            <div class="row2">
+            <div class="grid2">
               <div class="cell">
-                <div class="lbl">CLUB (SEASON)</div>
-                <div class="val" id="p-club">—</div>
+                <div class="h">Club (Season)</div>
+                <div class="t" id="pClub">—</div>
               </div>
               <div class="cell">
-                <div class="lbl">LEAGUE</div>
-                <div class="val" id="p-league">—</div>
-              </div>
-            </div>
-
-            <div class="row3">
-              <div class="cell">
-                <div class="lbl">DATE OF BIRTH</div>
-                <div class="val" id="p-dob">—</div>
-              </div>
-              <div class="cell">
-                <div class="lbl">AGE (SEASON)</div>
-                <div class="val" id="p-age">—</div>
-              </div>
-              <div class="cell">
-                <div class="lbl">HEIGHT</div>
-                <div class="val" id="p-height">—</div>
+                <div class="h">League</div>
+                <div class="t" id="pLeague">—</div>
               </div>
             </div>
 
-            <div class="row3">
+            <div class="grid3">
               <div class="cell">
-                <div class="lbl">WEIGHT</div>
-                <div class="val" id="p-weight">—</div>
+                <div class="h">Date of birth</div>
+                <div class="t" id="pDob">—</div>
               </div>
               <div class="cell">
-                <div class="lbl">PREFERRED FOOT</div>
-                <div class="val" id="p-foot">—</div>
+                <div class="h">Age (Season)</div>
+                <div class="t" id="pAge">—</div>
               </div>
               <div class="cell">
-                <div class="lbl">SHIRT NUMBER</div>
-                <div class="val" id="p-shirt">—</div>
-              </div>
-            </div>
-
-            <div class="row2">
-              <div class="cell">
-                <div class="lbl">POSITION</div>
-                <div class="val" id="p-position">—</div>
-              </div>
-              <div class="cell">
-                <div class="lbl">PROFILE</div>
-                <div class="val" id="p-profile">—</div>
+                <div class="h">Height / Weight</div>
+                <div class="t" id="pHw">—</div>
               </div>
             </div>
 
-            <div class="row2">
+            <div class="grid3">
               <div class="cell">
-                <div class="lbl">MARKET VALUE</div>
-                <div class="val" id="p-value">—</div>
+                <div class="h">Preferred foot</div>
+                <div class="t" id="pFoot">—</div>
               </div>
               <div class="cell">
-                <div class="lbl">NATIONAL TEAM</div>
-                <div class="val" id="p-nt">—</div>
+                <div class="h">Shirt number</div>
+                <div class="t" id="pShirt">—</div>
+              </div>
+              <div class="cell">
+                <div class="h">Primary position</div>
+                <div class="t" id="pPos">—</div>
               </div>
             </div>
 
-            <div class="cell full">
-              <div class="lbl">TRANSFERS</div>
-              <div class="val" id="p-transfers">—</div>
+            <div class="grid2">
+              <div class="cell">
+                <div class="h">Market value</div>
+                <div class="t" id="pValue">—</div>
+              </div>
+              <div class="cell">
+                <div class="h">National team</div>
+                <div class="t" id="pNT">—</div>
+              </div>
+            </div>
+
+            <div class="cell">
+              <div class="h">Transfers</div>
+              <div class="t" id="pTransfers">—</div>
             </div>
           </div>
 
-          <!-- PITCH -->
-          <div class="pitch" aria-label="Position pitch">
+          <div class="pitch">
             <div class="pitch-title">POSITION</div>
             <div class="pitch-lines"></div>
             <div class="dot" id="posDot" title="Drag to approximate typical zone"></div>
-            <div class="pitch-hint">Drag the dot to match the typical on-field zone.</div>
-            <div class="pos-tag" id="posTag">RW</div>
+            <div class="posTag" id="posTag">RW</div>
+            <div class="pitch-note">Drag the dot to show typical receiving zone.</div>
           </div>
         </section>
 
-        <!-- KEY REQUIREMENTS (to satisfy rubric quickly) -->
-        <section class="requirements" aria-label="Project requirements">
-          <div class="req">
-            <div class="req-k">Eligibility</div>
-            <div class="req-v" id="req-eligibility">—</div>
+        <!-- SDR BENCHMARK CONTEXT -->
+        <section class="panel">
+          <div class="panel-title">Outstanding dribbling (SDR) — evaluation context</div>
+          <div class="panel-text" id="sdrContext">—</div>
+        </section>
+
+        <!-- CHARACTERISTICS (EVALUATOR LANGUAGE) -->
+        <section class="cards2">
+          <div class="card">
+            <div class="card-title">PHYSICAL CHARACTERISTICS</div>
+            <div class="card-text" id="txtPhysical">—</div>
           </div>
-          <div class="req">
-            <div class="req-k">Winger</div>
-            <div class="req-v" id="req-winger">—</div>
+          <div class="card">
+            <div class="card-title">TECHNICAL CHARACTERISTICS (SDR FOCUS)</div>
+            <div class="card-text" id="txtTechnical">—</div>
           </div>
-          <div class="req">
-            <div class="req-k">Age 18–25</div>
-            <div class="req-v" id="req-age">—</div>
+          <div class="card">
+            <div class="card-title">TACTICAL CHARACTERISTICS</div>
+            <div class="card-text" id="txtTactical">—</div>
           </div>
-          <div class="req">
-            <div class="req-k">Outstanding dribbling</div>
-            <div class="req-v" id="req-dribbling">—</div>
+          <div class="card">
+            <div class="card-title">PERSONAL OPINION (SCOUT)</div>
+            <div class="card-text" id="txtOpinion">—</div>
           </div>
         </section>
 
-        <!-- CHARACTERISTICS -->
-        <section class="bigbox" aria-label="Characteristics">
-          <div class="bigcol">
-            <div class="section-title">PHYSICAL CHARACTERISTICS</div>
-            <div class="text" id="txt-physical">[Fill manually]</div>
-          </div>
-          <div class="bigcol">
-            <div class="section-title">TECHNICAL CHARACTERISTICS</div>
-            <div class="text" id="txt-technical">[Fill manually]</div>
-          </div>
-          <div class="bigcol">
-            <div class="section-title">TACTICAL CHARACTERISTICS</div>
-            <div class="text" id="txt-tactical">[Fill manually]</div>
-          </div>
-          <div class="bigcol">
-            <div class="section-title">PERSONAL OPINION</div>
-            <div class="text" id="txt-opinion">[Fill manually]</div>
-          </div>
-        </section>
-
-        <!-- SEASON STATS TABLES (compact) -->
-        <section class="tables" aria-label="Season breakdown tables">
-          <div class="tablebox">
-            <div class="table-title">FINISHING (SEASON)</div>
-            <div class="minirow">
-              <div class="miniCell"><div class="k">Shots</div><div class="v" id="fin-shots">—</div></div>
-              <div class="miniCell"><div class="k">SOT</div><div class="v" id="fin-sot">—</div></div>
-              <div class="miniCell"><div class="k">BCM</div><div class="v" id="fin-bcm">—</div></div>
+        <!-- TABLES -->
+        <section class="tables">
+          <div class="table">
+            <div class="table-title">FINISHING</div>
+            <div class="row">
+              <div class="m"><div class="k">Shots (TOS)</div><div class="v" id="finShots">—</div></div>
+              <div class="m"><div class="k">Shots on target (SOT)</div><div class="v" id="finSot">—</div></div>
+              <div class="m"><div class="k">Big chances missed (BCM)</div><div class="v" id="finBcm">—</div></div>
             </div>
           </div>
 
-          <div class="tablebox">
-            <div class="table-title">CREATIVITY (SEASON)</div>
-            <div class="minirow">
-              <div class="miniCell"><div class="k">Key passes</div><div class="v" id="cre-keyp">—</div></div>
-              <div class="miniCell"><div class="k">BCC</div><div class="v" id="cre-bcc">—</div></div>
-              <div class="miniCell"><div class="k">SDR</div><div class="v" id="cre-sdr">—</div></div>
+          <div class="table">
+            <div class="table-title">CREATIVITY</div>
+            <div class="row">
+              <div class="m"><div class="k">Key passes (KEYP)</div><div class="v" id="creKeyp">—</div></div>
+              <div class="m"><div class="k">Big chances created (BCC)</div><div class="v" id="creBcc">—</div></div>
+              <div class="m"><div class="k">Successful dribbles (SDR)</div><div class="v" id="creSdr">—</div></div>
             </div>
           </div>
 
-          <div class="tablebox">
-            <div class="table-title">PASSES (SEASON)</div>
-            <div class="minirow">
-              <div class="miniCell"><div class="k">Attempts</div><div class="v" id="pas-aps">—</div></div>
-              <div class="miniCell"><div class="k">Pass %</div><div class="v" id="pas-pct">—</div></div>
-              <div class="miniCell"><div class="k">Acc. long</div><div class="v" id="pas-alb">—</div></div>
-              <div class="miniCell"><div class="k">Long %</div><div class="v" id="pas-lbpct">—</div></div>
+          <div class="table">
+            <div class="table-title">PASSING</div>
+            <div class="row4">
+              <div class="m"><div class="k">Pass attempts (APS)</div><div class="v" id="pasAps">—</div></div>
+              <div class="m"><div class="k">Pass % (APS%)</div><div class="v" id="pasPct">—</div></div>
+              <div class="m"><div class="k">Acc. long balls (ALB)</div><div class="v" id="pasAlb">—</div></div>
+              <div class="m"><div class="k">Long ball % (LBA%)</div><div class="v" id="pasLbPct">—</div></div>
             </div>
           </div>
 
-          <div class="tablebox">
-            <div class="table-title">DEFENSE (SEASON)</div>
-            <div class="minirow">
-              <div class="miniCell"><div class="k">Tackles</div><div class="v" id="def-tack">—</div></div>
-              <div class="miniCell"><div class="k">Interceptions</div><div class="v" id="def-int">—</div></div>
-              <div class="miniCell"><div class="k">Yellow cards</div><div class="v" id="def-yc">—</div></div>
+          <div class="table">
+            <div class="table-title">DEFENDING</div>
+            <div class="row">
+              <div class="m"><div class="k">Tackles (TACK)</div><div class="v" id="defTack">—</div></div>
+              <div class="m"><div class="k">Interceptions (INT)</div><div class="v" id="defInt">—</div></div>
+              <div class="m"><div class="k">Yellow cards (YC)</div><div class="v" id="defYc">—</div></div>
             </div>
           </div>
 
-          <div class="tablebox wide">
-            <div class="table-title">ADDITIONAL (SEASON)</div>
-            <div class="minirow">
-              <div class="miniCell"><div class="k">xG</div><div class="v" id="add-xg">—</div></div>
-              <div class="miniCell"><div class="k">xA</div><div class="v" id="add-xa">—</div></div>
-              <div class="miniCell"><div class="k">GI</div><div class="v" id="add-gi">—</div></div>
-              <div class="miniCell"><div class="k">xGI</div><div class="v" id="add-xgi">—</div></div>
+          <div class="table wide">
+            <div class="table-title">ADDITIONAL</div>
+            <div class="row4">
+              <div class="m"><div class="k">Expected goals (xG)</div><div class="v" id="addXg">—</div></div>
+              <div class="m"><div class="k">Expected assists (xA)</div><div class="v" id="addXa">—</div></div>
+              <div class="m"><div class="k">GI (G+A)</div><div class="v" id="addGi">—</div></div>
+              <div class="m"><div class="k">Expected GI (xGI)</div><div class="v" id="addXgi">—</div></div>
             </div>
           </div>
         </section>
 
-        <!-- CHARTS (discrete) -->
-        <section class="charts" aria-label="Charts">
-          <div class="chartbox">
-            <div class="chart-title">RATING BY SEASON</div>
-            <canvas id="chartRating" width="520" height="180" aria-label="Rating chart"></canvas>
+        <!-- CHARTS -->
+        <section class="charts">
+          <div class="chart">
+            <div class="chart-title">SDR% BY SEASON</div>
+            <canvas id="chartSdr" width="520" height="200"></canvas>
+            <div class="chart-note">Line = Successful Dribble Rate (SDR%) per season.</div>
           </div>
-          <div class="chartbox">
+          <div class="chart">
             <div class="chart-title">GOAL INVOLVEMENT (GI) BY SEASON</div>
-            <canvas id="chartGI" width="520" height="180" aria-label="GI chart"></canvas>
+            <canvas id="chartGi" width="520" height="200"></canvas>
+            <div class="chart-note">Bars = Goals + Assists per season.</div>
           </div>
         </section>
 
-        <!-- MATCH OBSERVATIONS -->
-        <section class="matches" aria-label="Match observations">
-          <div class="match-head">
-            <div>DATE</div><div>MATCH</div><div>DESCRIPTION</div>
-          </div>
-          <div class="match-rows">
-            <div>1 -</div><div id="m1-match">[Fill manually]</div><div id="m1-desc">[Fill manually]</div>
-            <div>2 -</div><div id="m2-match">[Fill manually]</div><div id="m2-desc">[Fill manually]</div>
-            <div>3 -</div><div id="m3-match">[Fill manually]</div><div id="m3-desc">[Fill manually]</div>
-          </div>
+        <!-- GLOSSARY -->
+        <section class="panel">
+          <details>
+            <summary class="summary">Metrics glossary</summary>
+            <ul class="gloss">
+              <li><strong>SDR%</strong>: Successful Dribble Rate (successful dribbles / attempted dribbles).</li>
+              <li><strong>SDR</strong>: Successful dribbles (count).</li>
+              <li><strong>xG</strong>: Expected goals.</li>
+              <li><strong>xA</strong>: Expected assists.</li>
+              <li><strong>GI</strong>: Goal involvement = goals + assists.</li>
+              <li><strong>xGI</strong>: Expected goal involvement = xG + xA.</li>
+              <li><strong>TOS</strong>: Total shots.</li>
+              <li><strong>SOT</strong>: Shots on target.</li>
+              <li><strong>BCM</strong>: Big chances missed.</li>
+              <li><strong>KEYP</strong>: Key passes (passes leading to a shot).</li>
+              <li><strong>BCC</strong>: Big chances created.</li>
+              <li><strong>APS</strong>: Pass attempts.</li>
+              <li><strong>APS%</strong>: Pass completion rate.</li>
+              <li><strong>ALB</strong>: Accurate long balls.</li>
+              <li><strong>LBA%</strong>: Long ball accuracy.</li>
+              <li><strong>TACK</strong>: Tackles.</li>
+              <li><strong>INT</strong>: Interceptions.</li>
+              <li><strong>YC</strong>: Yellow cards.</li>
+            </ul>
+          </details>
         </section>
 
-        <div class="footer" id="footerLine">
-          Note: This page is a Technical File (Activity 1 template) with objective season data + scout comments fields.
-        </div>
+        <footer class="footer">
+          <div><strong>Project developed by João Andrade — 2026</strong></div>
+          <div class="footer-sub">
+            Module 5: Reporting — Professional Diploma in Football Scouting and Analysis — Barça Innovation Hub
+          </div>
+        </footer>
       </main>
-
     </div>
   </div>
 
   <script type="module" src="./app.js"></script>
 </body>
 </html>
+
 
