@@ -1,5 +1,3 @@
-# football_scouting_analysis
-
 # Scouting Technical File — Désiré Doué (RW) — Season Selector (MVC)
 
 This repository hosts a web-based **Technical File** created using the Activity 1 template concept, submitted for:
